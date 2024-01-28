@@ -13,7 +13,7 @@ import WebKit
 /// Takes care of downloading file with a WKWebview
 ///
 /// The object becomes the navigation delegate of the WKWebView and has to be configured with supported MIME types and a ``WKDownloadHelperDelegate`` object to receive updated about file downloads.
-@available(iOS 11.0, *)
+@available(iOS 11.0, macOS 11.3, *)
 public class WKDownloadHelper: NSObject {
     /// Initialize the helper with a webview, supported MIME types and the delegate object
     ///

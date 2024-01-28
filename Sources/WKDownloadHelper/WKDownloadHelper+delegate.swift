@@ -11,7 +11,7 @@ import WebKit
 
 /// WKNavigation and WKDownload delegate implementation
 
-@available(iOS 11.0, *)
+@available(iOS 11.0, macOS 11.3, *)
 extension WKDownloadHelper: WKNavigationDelegate {
     public func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         if let delegate = delegate,
@@ -43,7 +43,7 @@ extension WKDownloadHelper: WKNavigationDelegate {
         }
         if let mimeType = navigationResponse.response.mimeType {
             if isMimeTypeConfigured(mimeType) {
-                if #available(iOS 14.5, *) {
+                if #available(iOS 14.5, macOS 11.3, *) {
                     decisionHandler(.download)
                 } else {
                     var fileName = getDefaultFileName(forMimeType: mimeType)
@@ -65,13 +65,13 @@ extension WKDownloadHelper: WKNavigationDelegate {
         decisionHandler(.allow)
     }
     
-    @available(iOS 14.5, *)
+    @available(iOS 14.5, macOS 11.3, *)
     public func webView(_ webView: WKWebView, navigationResponse: WKNavigationResponse, didBecome download: WKDownload) {
         download.delegate = self
     }
 }
 
-@available(iOS 14.5, *)
+@available(iOS 14.5, macOS 11.3, *)
 extension WKDownloadHelper: WKDownloadDelegate {
     public func download(_ download: WKDownload, decideDestinationUsing response: URLResponse, suggestedFilename: String, completionHandler: @escaping (URL?) -> Void) {
         guard let url = delegate?.localURLForFile(withName: suggestedFilename) else {
